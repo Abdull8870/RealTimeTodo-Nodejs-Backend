@@ -16,7 +16,7 @@ const app = express();
 
 mongoose
   .connect(
-    appConfig.db
+    appConfig.db.uri
   )
   .then(() => {
         console.log("Connected to database!");
