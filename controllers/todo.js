@@ -2,6 +2,14 @@
 const Todo=require("../models/todo");
 const Undo=require("../models/undo");
 
+/**
+ * @description this is used to add a new todo list
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
+
 exports.addActivity = (req, res, next) => {
 
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
@@ -50,6 +58,12 @@ exports.addActivity = (req, res, next) => {
     });
 };
 
+/**
+ * @description this is used to add a new item to a todo list
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 exports.addList=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
@@ -80,6 +94,12 @@ exports.addList=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to add a sub item to a todo list
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.addSubItem=(req,res,next)=>{
@@ -116,6 +136,13 @@ exports.addSubItem=(req,res,next)=>{
 }
 
 
+/**
+ * @description this is used to make an item done in a todo list
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
 
 exports.markListDone=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
@@ -138,6 +165,13 @@ exports.markListDone=(req,res,next)=>{
   });
 
 }
+
+/**
+ * @description this is used to open an item in a todo list
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.markListOpen=(req,res,next)=>{
@@ -165,7 +199,12 @@ exports.markListOpen=(req,res,next)=>{
 
 
 
-
+/**
+ * @description this is used mark sub item done in a todo list
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 exports.markSubListDone=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
@@ -194,6 +233,13 @@ exports.markSubListDone=(req,res,next)=>{
   });
 
 }
+
+/**
+ * @description this is used mark sub item open in a todo list
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.markSubListOpen=(req,res,next)=>{
@@ -224,6 +270,12 @@ exports.markSubListOpen=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to open a todo list
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.markActivityDone=(req,res,next)=>{
@@ -243,6 +295,14 @@ exports.markActivityDone=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to restore a todo list
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
+
 
 exports.restoreActivity=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
@@ -261,6 +321,13 @@ exports.restoreActivity=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to open a todo list
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
 exports.openActivity=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
   const _id=req.body.activityId;
@@ -277,6 +344,14 @@ exports.openActivity=(req,res,next)=>{
   });
 
 }
+
+
+/**
+ * @description this is used to get all todo list
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.getActivity = (req, res, next) => {
@@ -298,6 +373,12 @@ exports.getActivity = (req, res, next) => {
     });
 
 };
+
+/**
+ * @description this is used to get all todo list
+ * @author Abdul Rahuman
+ * @param {*} any
+ */
 
 
 let saveHistory=(id)=>{

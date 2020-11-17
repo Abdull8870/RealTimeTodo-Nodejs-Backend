@@ -1,6 +1,13 @@
-
 const Todo=require("../models/todo");
 const Undo=require("../models/undo");
+
+
+/**
+ * @description this is used to get the todolist to be edited of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.getEditActivity=(req,res,next)=>{
@@ -13,6 +20,13 @@ exports.getEditActivity=(req,res,next)=>{
   });
 
 }
+
+/**
+ * @description this is used to edit the title of an todolist of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 exports.editTitle=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
@@ -31,6 +45,14 @@ exports.editTitle=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to edit the description of an todolist of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
+
 exports.editDescription=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
   const id=req.body.id;
@@ -47,6 +69,14 @@ exports.editDescription=(req,res,next)=>{
   });
 
 }
+
+/**
+ * @description this is used to edit the title of an item in a todolist of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
 
 exports.editItem=(req,res,next)=> {
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
@@ -72,6 +102,14 @@ exports.editItem=(req,res,next)=> {
   });
 
 }
+
+/**
+ * @description this is used to edit the sub item in a todolist of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
 
 exports.editSubItem=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
@@ -103,6 +141,13 @@ exports.editSubItem=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to delete an item in a todolist of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
 
 exports.deleteItem=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
@@ -126,6 +171,13 @@ exports.deleteItem=(req,res,next)=>{
   });
 
 }
+
+/**
+ * @description this is used to delete a sub item in a todolist of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 exports.deleteSubItem=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
@@ -155,6 +207,12 @@ exports.deleteSubItem=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to delete a todolist of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 exports.deleteActivity=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
@@ -172,6 +230,13 @@ exports.deleteActivity=(req,res,next)=>{
   });
 
 }
+
+/**
+ * @description this is used to delete a todolist of a friend
+ * @author Abdul Rahuman
+ * @param {*} any
+ */
+
 
 
 let saveHistory=(id)=>{

@@ -1,5 +1,14 @@
 const User = require("../models/user");
 
+/**
+ * @description this is used to get all users details
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
+
+
 exports.getAllUsers=(req,res,next)=>{
 
   const id=req.query.id;
@@ -12,6 +21,13 @@ exports.getAllUsers=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to get friend request received by the user
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
 exports.getAllRequest=(req,res,next)=>{
   const userId=req.userData.userId;
   User.findOne({_id:userId},{friends:1,friendRequest:1,friendRequestSent:1}).then(result=>{
@@ -23,6 +39,12 @@ exports.getAllRequest=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to get friend request sent by the user
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 
@@ -37,6 +59,12 @@ exports.getFriendRequestSent=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to get friends of the user
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.getFriends=(req,res,next)=>{
@@ -49,6 +77,13 @@ exports.getFriends=(req,res,next)=>{
   });
 
 }
+
+/**
+ * @description this is used to send request to a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.sendRequest=(req,res,next)=>{
@@ -83,6 +118,13 @@ exports.sendRequest=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to revoke a friend request sent to a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
 
 exports.cancelRequest=(req,res,next)=>{
 
@@ -112,6 +154,13 @@ exports.cancelRequest=(req,res,next)=>{
 }
 
 
+
+/**
+ * @description this is used to accept a friend request
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.acceptRequest=(req,res,next)=>{
@@ -156,6 +205,14 @@ exports.acceptRequest=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to reject a friend request
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
+
 
 exports.rejectRequest=(req,res,next)=>{
 
@@ -186,6 +243,13 @@ exports.rejectRequest=(req,res,next)=>{
   });
 
 }
+
+/**
+ * @description this is used to unfriend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.unFriend=(req,res,next)=>{

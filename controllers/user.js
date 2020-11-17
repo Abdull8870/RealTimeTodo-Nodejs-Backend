@@ -13,6 +13,13 @@ const transporter=nodemailer.createTransport(sendgridTransport({
   }
 }));
 
+/**
+ * @description this is used to get the all country list and codes
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
 
 exports.getCode = (req, res, next) => {
   let id='5f5cd0e718a7ea249c50684f';
@@ -31,6 +38,12 @@ exports.getCode = (req, res, next) => {
     });
   }
 
+  /**
+   * @description this is used to create a new user
+   * @author Abdul Rahuman
+   * @param {*} req
+   * @param {*} res
+   */
 
 
 exports.createUser = (req, res, next) => {
@@ -63,6 +76,15 @@ exports.createUser = (req, res, next) => {
       });
   });
 }
+
+
+  /**
+   * @description this is used for user login
+   * @author Abdul Rahuman
+   * @param {*} req
+   * @param {*} res
+   */
+
 
 exports.userLogin = (req, res, next) => {
   let fetchedUser;
@@ -114,6 +136,14 @@ exports.userLogin = (req, res, next) => {
       });
     });
 }
+
+/**
+ * @description this is used to send password reset code
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
 
 exports.userReset =(req,res,next)=>{
   let secretCode=Math.floor(Math.random()*90000) + 10000;
@@ -171,6 +201,14 @@ exports.userReset =(req,res,next)=>{
 
 
 }
+
+/**
+ * @description this is used to reset the password
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
 
 exports.resetPassword=(req,res,next)=>{
   let resetUser;

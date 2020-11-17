@@ -3,119 +3,12 @@ const Todo=require("../models/todo");
 const Undo=require("../models/undo");
 
 
-exports.addActivity = (req, res, next) => {
-
-  const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
-  const creator=req.userData.userId;
-  const activityName=req.body.activityName;
-  const description=req.body.description;
-  const deleted=false;
-  const active=true;
-  let activityId;
-  let createdPro;
-
-  const todo = new Todo({
-    activityName:activityName,
-    creator:creator,
-    active:active,
-    deleted:deleted,
-    description:description,
-    modifiedBy:modifiedBy
-  });
-  todo.save()
-    .then(createdProject => {
-      activityId=createdProject._id;
-      createdPro=createdProject;
-
-      const undo=new Undo({
-        activityId:activityId,
-        history:[]
-      });
-
-      return undo.save();
-    }).then(result=>{
-
-      result.history.push(createdPro);
-      return result.save();
-    }).then(result=>{
-
-      res.status(201).json({
-      message: "PROJECT ADDED SUCCESSFULLY",
-    });
-    })
-    .catch(error => {
-
-      res.status(500).json({
-        message: "CREATING A PROJECT FAILED"
-      });
-    });
-};
-
-
-exports.addList=(req,res,next)=>{
-  const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
-  const listName=req.body.list;
-  const _id=req.body._id;
-  const active=true;
-  const deleted=true;
-
-  Todo.find({_id:_id}).then(result=>{
-
-    result[0].mainlist.push({
-      listName: listName,
-      active:active,
-      deleted:deleted,
-      subItems:[]
-    });
-
-    return result[0].save();
-  }).then(result=>{
-    result.modifiedBy=modifiedBy;
-    return result.save();
-  }).then(result=>{
-      saveHistory(_id);
-      res.status(201).json({message:"SUCCESS",data:result});
-  }).catch(err=>{
-      res.status(500).json({message:"Some unexpected error happened"});
-  });
-
-}
-
-
-
-exports.addSubItem=(req,res,next)=>{
-  const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
-  const subItem=req.body.subItem;
-  const _id=req.body._id;
-  const itemId=req.body.itemId;
-  const active=true;
-  const deleted=false;
-  Todo.find({_id:_id}).then(result=>{
-
-    let index=result[0].mainlist.findIndex((list)=>{
-     if (list._id==itemId)
-      return list;
-        });
-
-      result[0].mainlist[index].subItems.push({
-      subItemName:subItem,
-      active:active,
-      deleted:deleted
-    });
-
-    return result[0].save();
-  }).then(result=>{
-    result.modifiedBy=modifiedBy;
-    return result.save();
-  }).then(result=>{
-    saveHistory(_id);
-    res.status(201).json({message:"SUCCESS",data:result});
-  }).catch(err=>{
-      res.status(500).json({message:"Some unexpected error happened"});
-  });
-
-}
-
+/**
+ * @description this is used to mark an item done in the todo list of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.markListDone=(req,res,next)=>{
@@ -141,6 +34,12 @@ exports.markListDone=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to open an item in the todo list of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 exports.markListOpen=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
@@ -166,7 +65,12 @@ exports.markListOpen=(req,res,next)=>{
 }
 
 
-
+/**
+ * @description this is used to open a sub item in the todo list of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.markSubListDone=(req,res,next)=>{
@@ -196,6 +100,13 @@ exports.markSubListDone=(req,res,next)=>{
   });
 
 }
+
+/**
+ * @description this is used to mark a sub item done in the todo list of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.markSubListOpen=(req,res,next)=>{
@@ -227,6 +138,12 @@ exports.markSubListOpen=(req,res,next)=>{
 }
 
 
+/**
+ * @description this is used to mark a todo list done of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 exports.markActivityDone=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
@@ -244,6 +161,13 @@ exports.markActivityDone=(req,res,next)=>{
   });
 
 }
+
+/**
+ * @description this is used to restore a todo list of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.restoreActivity=(req,res,next)=>{
@@ -263,6 +187,14 @@ exports.restoreActivity=(req,res,next)=>{
 
 }
 
+/**
+ * @description this is used to open a todo list of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
+
+
 exports.openActivity=(req,res,next)=>{
   const modifiedBy=req.userData.firstName+' '+req.userData.lastName;
   const _id=req.body.activityId;
@@ -279,6 +211,13 @@ exports.openActivity=(req,res,next)=>{
   });
 
 }
+
+/**
+ * @description this is used to get all the todo list of a friend
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ */
 
 
 exports.getActivity = (req, res, next) => {
@@ -300,6 +239,13 @@ exports.getActivity = (req, res, next) => {
     });
 
 };
+
+
+/**
+ * @description this is used to get all the todo list of a friend
+ * @author Abdul Rahuman
+ * @param {*} any
+ */
 
 
 let saveHistory=(id)=>{
