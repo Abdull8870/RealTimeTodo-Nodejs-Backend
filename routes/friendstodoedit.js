@@ -4,13 +4,14 @@ const friendstodoeditController = require("../controllers/friendstodoedit");
 
 const undoController = require("../controllers/undo");
 
-const checkAuth = require("../middleware/check-auth");
+const FriendsAuth = require("../middleware/friendAuth");
+
 
 const router = express.Router();
 
 
 
-router.get("/get",checkAuth,friendstodoeditController.getEditActivity);
+router.get("/get",FriendsAuth,friendstodoeditController.getEditActivity);
 
 
 /**
@@ -56,7 +57,7 @@ router.get("/get",checkAuth,friendstodoeditController.getEditActivity);
 
 
 
-router.post("/title",checkAuth,friendstodoeditController.editTitle);
+router.post("/title",FriendsAuth,friendstodoeditController.editTitle);
 
 /**
  * @api {post} /api/editfriendslist/title
@@ -86,7 +87,7 @@ router.post("/title",checkAuth,friendstodoeditController.editTitle);
 
 
 
-router.post("/desc",checkAuth,friendstodoeditController.editDescription);
+router.post("/desc",FriendsAuth,friendstodoeditController.editDescription);
 
 
 /**
@@ -115,7 +116,7 @@ router.post("/desc",checkAuth,friendstodoeditController.editDescription);
 
 
 
-router.post("/item",checkAuth,friendstodoeditController.editItem);
+router.post("/item",FriendsAuth,friendstodoeditController.editItem);
 
 
 /**
@@ -146,7 +147,7 @@ router.post("/item",checkAuth,friendstodoeditController.editItem);
 
 
 
-router.post("/subItem",checkAuth,friendstodoeditController.editSubItem);
+router.post("/subItem",FriendsAuth,friendstodoeditController.editSubItem);
 
 /**
  * @api {post} /api/editfriendslist/subItem
@@ -178,7 +179,7 @@ router.post("/subItem",checkAuth,friendstodoeditController.editSubItem);
 
 
 
-router.post("/deleteitem",checkAuth,friendstodoeditController.deleteItem);
+router.post("/deleteitem",FriendsAuth,friendstodoeditController.deleteItem);
 
 
 /**
@@ -205,7 +206,7 @@ router.post("/deleteitem",checkAuth,friendstodoeditController.deleteItem);
 
 
 
-router.post("/deleteSubItem",checkAuth,friendstodoeditController.deleteSubItem);
+router.post("/deleteSubItem",FriendsAuth,friendstodoeditController.deleteSubItem);
 
 /**
  * @api {post} /api/editfriendslist/deleteSubItem
@@ -232,7 +233,7 @@ router.post("/deleteSubItem",checkAuth,friendstodoeditController.deleteSubItem);
 
 
 
-router.post("/deleteActivity",checkAuth,friendstodoeditController.deleteActivity);
+router.post("/deleteActivity",FriendsAuth,friendstodoeditController.deleteActivity);
 
 /**
  * @api {post} /api/editfriendslist/deleteActivity
