@@ -1,6 +1,15 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
+/**
+ * @description this is used to check whether the user is authorized and friend with user 
+ * @author Abdul Rahuman
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
+
+
 module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
